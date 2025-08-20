@@ -9,24 +9,24 @@ pipeline {
             }
         }
 
-        stage('Clean Up Docker') {
-            steps {
-                script {
-                    // Stop and remove all Docker containers
-                   sh '''
-                        # Stop running containers if any
-                        if [ "$(docker ps -q)" ]; then
-                          docker stop $(docker ps -q)
-                        fi
+        // stage('Clean Up Docker') {
+        //     steps {
+        //         script {
+        //             // Stop and remove all Docker containers
+        //            sh '''
+        //                 # Stop running containers if any
+        //                 if [ "$(docker ps -q)" ]; then
+        //                   docker stop $(docker ps -q)
+        //                 fi
             
-                        # Remove all containers if any
-                        if [ "$(docker ps -a -q)" ]; then
-                          docker rm $(docker ps -a -q)
-                        fi
-                    '''
-                }
-            }
-        }
+        //                 # Remove all containers if any
+        //                 if [ "$(docker ps -a -q)" ]; then
+        //                   docker rm $(docker ps -a -q)
+        //                 fi
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Deploy with Docker Compose') {
             steps {
