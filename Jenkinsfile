@@ -13,9 +13,16 @@ pipeline {
             steps {
                 script {
                     // Stop and remove all Docker containers
-                    sh '''
-                    docker stop $(docker ps -q) || true
-                    docker rm $(docker ps -a -q) || true
+                   sh '''
+                        # Stop running containers if any
+                        if [ "$(docker ps -q)" ]; then
+                          docker stop $(docker ps -q)
+                        fi
+            
+                        # Remove all containers if any
+                        if [ "$(docker ps -a -q)" ]; then
+                          docker rm $(docker ps -a -q)
+                        fi
                     '''
                 }
             }
