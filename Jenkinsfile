@@ -48,7 +48,7 @@ pipeline {
         }
         always {
             echo 'Pipeline finished.'
-            cleanWS()
+            cleanWs()
         }
     }
 }
