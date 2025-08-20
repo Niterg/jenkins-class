@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Deploy the application using docker-compose and compose.yml
-                    sh 'docker-compose -f compose.yml up -d --build'
+                    sh 'docker compose -f compose.yml up -d --build'
                 }
             }
         }
