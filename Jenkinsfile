@@ -9,6 +9,17 @@ pipeline {
             }
         }
 
+        stage('Clean Up Docker') { 
+            steps { 
+                script { 
+                    // Stop and remove all Docker containers 
+                    sh ''' docker stop $(docker ps -q) || true 
+                    docker rm $(docker ps -a -q) || true 
+                    ''' 
+                } 
+            } 
+        }
+
         stage('Deploy with Docker Compose') {
             steps {
                 script {
@@ -37,6 +48,7 @@ pipeline {
         }
         always {
             echo 'Pipeline finished.'
+            cleanWS()
         }
     }
 }
